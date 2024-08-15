@@ -16,7 +16,7 @@ public class Category implements Serializable {
 
 	private Long id;
 	private String name;
-
+	
 	public Category() {
 	}
 
@@ -42,7 +42,7 @@ public class Category implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
