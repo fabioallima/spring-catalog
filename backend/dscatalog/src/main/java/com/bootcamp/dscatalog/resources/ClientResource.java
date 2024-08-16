@@ -5,7 +5,6 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,32 +18,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.bootcamp.dscatalog.dto.CategoryDTO;
-import com.bootcamp.dscatalog.services.CategoryService;
+import com.bootcamp.dscatalog.dto.ClientDTO;
+import com.bootcamp.dscatalog.services.ClientService;
 
 @RestController
-@RequestMapping(value = "/categories")
-public class CategoryResource {
+@RequestMapping(value = "/clients")
+public class ClientResource {
 
 	@Autowired
-	private CategoryService service;
+	private ClientService service;
 
 	@GetMapping
-	public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable) {
-		Page<CategoryDTO> list = service.findAllPaged(pageable);
+	public ResponseEntity<Page<ClientDTO>> findAll(@RequestParam(defaultValue = "0") Integer page,
+			@RequestParam(defaultValue = "12") Integer linesPerPage,
+			@RequestParam(defaultValue = "DESC") String direction,
+			@RequestParam(defaultValue = "name") String orderBy) {
+
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+
+		Page<ClientDTO> list = service.findAllPaged(pageRequest);
 
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
-		CategoryDTO dto = service.findById(id);
+	public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
+		ClientDTO dto = service.findById(id);
 
 		return ResponseEntity.ok().body(dto);
 	}
 
 	@PostMapping
-	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+	public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 
@@ -52,7 +57,7 @@ public class CategoryResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
+	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto) {
 		dto = service.update(id, dto);
 
 		return ResponseEntity.ok().body(dto);

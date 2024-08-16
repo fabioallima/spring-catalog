@@ -1,6 +1,6 @@
-INSERT INTO tb_category (name) VALUES ('Livros');
-INSERT INTO tb_category (name) VALUES ('Eletrônicos');
-INSERT INTO tb_category (name) VALUES ('Computadores');
+INSERT INTO tb_category (name, created_At) VALUES ('Livros', NOW());
+INSERT INTO tb_category (name, created_At) VALUES ('Eletrônicos', NOW());
+INSERT INTO tb_category (name, created_At) VALUES ('Computadores', NOW());
 
 INSERT INTO tb_product (name, price, date, description, img_url) VALUES ('The Lord of the Rings', 90.5, TIMESTAMP WITH TIME ZONE '2020-07-13T20:50:07.12345Z', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/1-big.jpg');
 INSERT INTO tb_product (name, price, date, description, img_url) VALUES ('Smart TV', 2190.0, TIMESTAMP WITH TIME ZONE '2020-07-14T10:00:00Z', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg');
@@ -54,3 +54,15 @@ INSERT INTO tb_product_category (product_id, category_id) VALUES (22, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (23, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (24, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (25, 3);
+
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Pedro Henrique Santos', '22222222222', 5000, '2024-08-15T19:58:42Z', 4);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Ana Beatriz Lima', '33333333333', 8000, '2024-08-15T19:58:42Z', 1);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Carlos Eduardo Pereira', '44444444444', 2000, '2024-08-15T19:58:42Z', 2);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Luisa Fernanda Souza', '55555555555', 9000, '2024-08-15T19:58:42Z', 3);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Ricardo Alexandre Rodrigues', '66666666666', 8000, '2024-08-15T19:58:42Z', 4);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Beatriz Helena Alves', '77777777777', 3000, '2024-08-15T19:58:42Z', 1);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Gabriel Lucas Silva', '88888888888', 3300, '2024-08-15T19:58:42Z', 2);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Juliana Cristina Santos', '99999999999', 31000, '2024-08-15T19:58:42Z', 3);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Felipe Henrique Oliveira', '00000000000', 3400, '2024-08-15T19:58:42Z', 4);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Camila Beatriz Lima', '12345678901', 2900, '2024-08-15T19:58:42Z', 1);
+INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Matheus Eduardo Pereira', '23456789012', 3200, '2024-08-15T19:58:42Z', 2);
