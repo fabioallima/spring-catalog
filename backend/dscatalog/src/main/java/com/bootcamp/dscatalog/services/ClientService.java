@@ -1,12 +1,15 @@
 package com.bootcamp.dscatalog.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +32,12 @@ public class ClientService {
 	public Page<ClientDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Client> list = repository.findAll(pageRequest);
 		return list.map(x -> new ClientDTO(x));
+	}
+	
+	@Transactional(readOnly = true)
+	public List<ClientDTO> findAll() {
+		List<Client> list = repository.findAll(Sort.by("id"));
+		return list.stream().map(x -> new ClientDTO(x)).collect(Collectors.toList());
 	}
 
 	@Transactional(readOnly = true)
