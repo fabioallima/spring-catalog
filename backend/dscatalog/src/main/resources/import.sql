@@ -66,3 +66,13 @@ INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Juliana
 INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Felipe Henrique Oliveira', '00000000000', 3400, '2024-08-15T19:58:42Z', 4);
 INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Camila Beatriz Lima', '12345678901', 2900, '2024-08-15T19:58:42Z', 1);
 INSERT INTO tb_client (name, cpf, income, birth_Date, children) VALUES ('Matheus Eduardo Pereira', '23456789012', 3200, '2024-08-15T19:58:42Z', 2);
+
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Maria', 'Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
