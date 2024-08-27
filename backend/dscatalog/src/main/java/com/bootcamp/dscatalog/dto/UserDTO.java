@@ -14,12 +14,12 @@ public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	
+
 	@Size(min = 2, max = 60, message = "Deve ter entre 5 e 60 caracteres")
 	@NotBlank(message = "Campo Obrigatório")
 	private String firstName;
 	private String lastName;
-	
+
 	@Email(message = "Favor entrar com um email válido")
 	private String email;
 
@@ -42,7 +42,7 @@ public class UserDTO implements Serializable {
 		this.email = entity.getEmail();
 		entity.getRoles().forEach(x -> this.roles.add(new RoleDTO(x)));
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
