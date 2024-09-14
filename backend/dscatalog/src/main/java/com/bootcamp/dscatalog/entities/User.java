@@ -1,6 +1,5 @@
 package com.bootcamp.dscatalog.entities;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,21 +18,21 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails, Serializable {
-	private static final long serialVersionUID = 1L;
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String firstName;
 	private String lastName;
-	
+
 	@Column(unique = true)
 	private String email;
 	private String password;
-	
+
 	@ManyToMany
 	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
@@ -88,15 +87,15 @@ public class User implements UserDetails, Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
-	
+
 	public void addRole(Role role) {
 		roles.add(role);
 	}
-	
+
 	public boolean hasRole(String roleName) {
 		for (Role role : roles) {
 			if (role.getAuthority().equals(roleName)) {
@@ -132,7 +131,7 @@ public class User implements UserDetails, Serializable {
 	public String getUsername() {
 		return email;
 	}
-	
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

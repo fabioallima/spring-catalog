@@ -1,6 +1,5 @@
 package com.bootcamp.dscatalog.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,11 +10,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_role")
-public class Role implements GrantedAuthority, Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class Role implements GrantedAuthority {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
