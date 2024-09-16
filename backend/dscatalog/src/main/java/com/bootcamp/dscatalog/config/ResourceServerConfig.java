@@ -4,11 +4,9 @@ import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -21,6 +19,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import com.bootcamp.dscatalog.config.customgrant.CustomAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -48,6 +48,11 @@ public class ResourceServerConfig {
 		http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
 		http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
 		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+		
+		http.addFilterBefore(new CorsFilter(corsConfigurationSource()), CorsFilter.class);
+		http.exceptionHandling(exh -> exh.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+		
+		
 		return http.build();
 	}
 
@@ -78,11 +83,10 @@ public class ResourceServerConfig {
 		return source;
 	}
 
-	@Bean
-	FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
-				new CorsFilter(corsConfigurationSource()));
-		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return bean;
-	}
+	/*
+	 * @Bean FilterRegistrationBean<CorsFilter> corsFilter() {
+	 * FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>( new
+	 * CorsFilter(corsConfigurationSource()));
+	 * bean.setOrder(Ordered.HIGHEST_PRECEDENCE); return bean; }
+	 */
 }

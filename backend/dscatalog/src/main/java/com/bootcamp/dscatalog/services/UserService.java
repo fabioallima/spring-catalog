@@ -3,7 +3,6 @@ package com.bootcamp.dscatalog.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -33,8 +32,9 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class UserService implements UserDetailsService {
 
-	private static Logger logger = org.slf4j.LoggerFactory.getLogger(UserService.class);
-	
+	// private static Logger logger =
+	// org.slf4j.LoggerFactory.getLogger(UserService.class);
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -64,9 +64,9 @@ public class UserService implements UserDetailsService {
 		copyDtoToEntity(dto, entity);
 
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-		
-		//entity.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
-		//entity.setPassword(dto.getPassword());
+
+		// entity.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
+		// entity.setPassword(dto.getPassword());
 
 		entity = repository.save(entity);
 		return new UserDTO(entity);
@@ -113,18 +113,18 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
-		
+
 		if (result.size() == 0) {
 			throw new UsernameNotFoundException("User not found");
 		}
-		
+
 		User user = new User();
 		user.setEmail(username);
 		user.setPassword(result.get(0).getPassword());
 		for (UserDetailsProjection projection : result) {
 			user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
 		}
-		
+
 		return user;
 	}
 
