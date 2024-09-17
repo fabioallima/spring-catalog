@@ -20,6 +20,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.bootcamp.dscatalog.config.customgrant.CustomAccessDeniedHandler;
 import com.bootcamp.dscatalog.config.customgrant.CustomAuthenticationEntryPoint;
 
 @Configuration
@@ -50,8 +51,9 @@ public class ResourceServerConfig {
 		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 		
 		http.addFilterBefore(new CorsFilter(corsConfigurationSource()), CorsFilter.class);
-		http.exceptionHandling(exh -> exh.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 		
+		http.exceptionHandling(exh -> exh.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+		http.exceptionHandling(exh -> exh.accessDeniedHandler(new CustomAccessDeniedHandler()));
 		
 		return http.build();
 	}
