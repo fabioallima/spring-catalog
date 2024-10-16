@@ -2,6 +2,8 @@ package com.bootcamp.dscatalog.resources.exceptions;
 
 import java.time.Instant;
 
+import com.bootcamp.dscatalog.services.EmailService;
+import com.bootcamp.dscatalog.services.exceptions.EmailException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -60,6 +62,20 @@ public class ResourceExceptionHandler {
 			error.addError(f.getField(), f.getDefaultMessage());
 		}
 		
+		return ResponseEntity.status(status).body(error);
+	}
+
+	@ExceptionHandler(EmailException.class)
+	public ResponseEntity<StandardError> email(EmailException e, HttpServletRequest request){
+		final HttpStatus status = HttpStatus.BAD_REQUEST;
+
+		StandardError error = new StandardError();
+		error.setTimestamp(Instant.now());
+		error.setStatus(status.value());
+		error.setError("Email exception");
+		error.setMessage(e.getMessage());
+		error.setPath(request.getRequestURI());
+
 		return ResponseEntity.status(status).body(error);
 	}
 }
