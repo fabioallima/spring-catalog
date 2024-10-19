@@ -11,7 +11,7 @@ public class UserInsertDTO extends UserDTO {
 
 	@NotBlank(message = "Campo Obrigatório")
 	@Size(min = 8, message = "Deve ter no mínimo 8 caracteres")
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$*&@#])[a-zA-Z\\d$*&@#]{8,}$", message = "Senha Fraca")
+	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$", message = "Senha Fraca")
 	private String password;
 
 	public UserInsertDTO() {

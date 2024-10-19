@@ -1,6 +1,7 @@
 package com.bootcamp.dscatalog.resources;
 
 import com.bootcamp.dscatalog.dto.EmailDTO;
+import com.bootcamp.dscatalog.dto.NewPasswordDTO;
 import com.bootcamp.dscatalog.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ public class AuthResource {
 	@PostMapping(value = "/recover-token")
 	public ResponseEntity<Void> createRecoverToken(@Valid @RequestBody EmailDTO body) {
 		authService.createRecoverToken(body);
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping(value = "/new-password")
+	public ResponseEntity<Void> saveNewPassword(@Valid @RequestBody NewPasswordDTO body) {
+		authService.saveNewPassword(body);
 
 		return ResponseEntity.noContent().build();
 	}
